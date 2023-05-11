@@ -1,0 +1,193 @@
+{% extends 'pages.html' %}
+
+{%load static%}
+<link rel="stylesheet" type="text/css" href="{% static 'css/style1.css' %}">
+
+{%block title%}
+    <title>Product Add</title>
+{%endblock%}
+
+{% block page %}
+
+
+<div class="container ende">
+    {% for msg in messages %}
+    <div class="alert alert-success mt-5 alert-dismissible fade show msg" style="width: 500px;">
+        <button type="button" class="close" data-dismiss="alert">x</button>
+        {{ msg }}
+    </div>
+    {% endfor %}
+</div>
+
+
+<div class="container-fluid contain" style="height: 60px;">
+    <div class="row">
+        <div class="col-2">
+            <img src="{% static 'image/login_logo.png' %}" class="pt-1" style="width: 25%;">
+        </div>
+        <div class="col-8">
+
+        </div>
+        <div class="col-1">
+            <a href="{% url 'prod_cart' %}"><i class='bx bxs-cart pt-3 cart_butt'></i>
+            <div style="background-color: rgb(35, 161, 235); color:white; font-size:15px; width:25px; height:25px; justify-content:center; text-align:center; position:relative; bottom:45px; left:20px; border-radius:50%; padding-bottom:4px; text-decoration:none"><b>{{number}}</b></div></a>
+        </div>
+        <div class="col-1">
+            {% if det.user_image == '/static/image/default.png' %}
+                <a href="#"><img src="{% static 'image/default.png' %}" width="40" height="40" class="dropbtn mt-2 rounded-circle img-thumbnail shadow-sm" onclick="toggle()"></a>
+            {% else %}
+                <a href="#"><img src="{{ det.user_image.url }}" width="40" height="40" class="dropbtn mt-2 rounded-circle img-thumbnail shadow-sm" onclick="toggle()"></a>
+            {% endif %}
+        </div>
+    </div>
+</div>
+<ul class="profile-dropdown-list">
+
+    <li class="profile-dropdown-list-item">
+        <a href="{% url 'profile_fun' %}" style="text-decoration: none;">
+            <i class='bx bxs-user'></i>
+            Profile
+        </a>
+    </li>
+    <li class="profile-dropdown-list-item">
+        <a href="{% url 'store_fun1' %}" style="text-decoration: none;">
+            <i class='bx bx-store'></i>
+            My Store
+        </a>
+    </li>
+    <li class="profile-dropdown-list-item">
+        <a href="{% url 'user_fun' %}" style="text-decoration: none;">
+            <i class='bx bxs-shopping-bag'></i>
+            My Products
+        </a>
+    </li>
+    <li class="profile-dropdown-list-item">
+        <a href="{% url 'allproduct_fun' %}" style="text-decoration: none;">
+            <i class='bx bxs-shopping-bag'></i>
+            All Products
+        </a>
+    </li>
+    <hr/>
+    <li class="profile-dropdown-list-item">
+        <a href="{% url 'logout' %}" style="text-decoration: none;">
+            <i class='bx bx-log-out-circle'></i>
+            Log out
+        </a>
+    </li>
+
+</ul>
+
+
+
+<div>
+    <h3 class="pl-5 pt-4" style="color: black;">Add Products</h3>
+</div>
+
+<br>
+<br>
+<div class="container rounded" style="background-color: white;">
+    <div class="row pt-3 px-3 pb-3">
+        <div class="col rounded shadow" style="background-color: white;">
+            <form method="post" action="{% url 'add_product' %}" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="row pt-3 px-2">
+                    <div class="col">
+                        <div class="form-group">
+                            <label class="form-label"><b>Title</b></label>
+                            <input type="text" class="form-control" placeholder="Title Of Product" name="title" required>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-group">
+                            <label><b>Categories</b></label>
+                            <select class="form-control" name="category" required>
+                                <option value="">--Select--</option>
+                                {% for cat in category %}
+                                <option value="{{cat.id}}"><b>{{cat.cat_name}}</b></option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="row px-2">
+                    <div class="col">
+                        <div class="form-group">
+                            <label class="form-label"><b>Product Discription</b></label>
+                            <textarea class="form-control" placeholder="Description" name="desc" rows="4" required></textarea>
+                          </div>
+                    </div>
+                </div>
+                <div class="row px-2">
+                    <div class="col">
+                        <div class="form-group">
+                            <label class="form-label"><b>Product Image</b></label>
+                            <input type="file" class="form-control" name="image">
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-group">
+                            <label class="form-label"><b>Price</b></label>
+                            <input type="number" class="form-control" name="price" placeholder="Enter Price" required>
+                        </div>
+                    </div>
+                </div>
+                <br>
+                <div class="row px-2">
+                    <div class="col">
+                        <button type="submit" class="btn btn-dark" style="width:1063px">ADD</button>
+                    </div>
+                </div>
+                <br>
+            </form>
+        </div>
+    </div>
+    
+</div>
+
+
+
+
+<script type="text/javascript">
+
+
+    let profileDropdownList = document.querySelector(".profile-dropdown-list");
+    let btn = document.querySelector(".dropbtn");
+
+    const toggle = ()=> profileDropdownList.classList.toggle("active");
+
+
+    const popupScreen1 = document.getElementById("popup-screen2");
+    const submitbtn1 = document.querySelector(".bt3");
+
+    const toggle3 = ()=> popupScreen1.classList.toggle("active"); 
+
+    submitbtn1.addEventListener("click", () =>{
+        popupScreen1.classList.remove("active");
+    });
+
+
+    
+</script>
+
+
+
+{% endblock %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

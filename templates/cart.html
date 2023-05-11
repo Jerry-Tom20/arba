@@ -1,0 +1,306 @@
+{% extends 'pages.html' %}
+
+{%load static%}
+<link rel="stylesheet" type="text/css" href="{% static 'css/style1.css' %}">
+
+{%block title%}
+    <title>Cart</title>
+{%endblock%}
+
+{% block page %}
+
+
+
+
+<div class="popup-screen" id="popup-screen">
+    <div class="popup-box" style="color: black;">
+        <div class="row no-gutters">
+            <div class="col-4">
+                <img src="{% static 'image/pngegg.png' %}" style="width: 45%;">
+            </div>
+            <div class="col-8" style="position: relative; right:60px; top:10px">
+                <h2>Terms & Conditions</h2>
+            </div>
+        </div>
+        <p class="text-muted">Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatibus necessitatibus culpa, voluptates rem odit est, doloribus, sunt iure tenetur quidem quas officiis. Beatae earum dolorum odit voluptas cum accusantium voluptate.</p>
+        <br>
+        <p class="text-muted">Lorem ipsum dolor sit amet consectetur adipisicing elit. Pariatur iure eligendi atque sapiente ipsa, neque aliquid harum sequi modi itaque doloribus dolorum vel dolor nostrum ducimus fuga? Cumque, incidunt aspernatur?</p>
+        <br>
+        <p class="text-muted">Lorem ipsum dolor sit amet consectetur adipisicing elit. Suscipit quisquam perspiciatis dolore, recusandae eveniet rem sequi. Architecto praesentium cupiditate accusamus repellendus inventore aperiam maxime molestias excepturi sequi sunt. Distinctio, debitis.</p>
+        <br>
+        <div class="row">
+            <div class="col" style="position: relative; left:60px">
+                <a href="#" class="btn1">Cancel</a>
+            </div>
+            <div class="col" style="position: relative; left:60px">
+                <a href="{% url 'accept' %}" class="btn2">Accept</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="container-fluid contain" style="height: 60px;">
+    <div class="row">
+        <div class="col-2">
+            <img src="{% static 'image/login_logo.png' %}" class="pt-1" style="width: 25%;">
+        </div>
+        <div class="col-8">
+
+        </div>
+        <div class="col-1">
+            <a href="{% url 'prod_cart' %}"><i class='bx bxs-cart pt-3 cart_butt'></i>
+            <div style="background-color: rgb(35, 161, 235); color:white; font-size:15px; width:25px; height:25px; justify-content:center; text-align:center; position:relative; bottom:45px; left:20px; border-radius:50%; padding-bottom:4px; text-decoration:none"><b>{{number}}</b></div></a>
+        </div>
+        <div class="col-1">
+            {% if det.user_image == '/static/image/default.png' %}
+                <a href="#"><img src="{% static 'image/default.png' %}" width="40" height="40" class="dropbtn mt-2 rounded-circle img-thumbnail shadow-sm" onclick="toggle()"></a>
+            {% else %}
+                <a href="#"><img src="{{ det.user_image.url }}" width="40" height="40" class="dropbtn mt-2 rounded-circle img-thumbnail shadow-sm" onclick="toggle()"></a>
+            {% endif %}
+        </div>
+    </div>
+</div>
+<ul class="profile-dropdown-list">
+
+    <li class="profile-dropdown-list-item">
+        <a href="{% url 'profile_fun' %}" style="text-decoration: none;">
+            <i class='bx bxs-user'></i>
+            Profile
+        </a>
+    </li>
+    <li class="profile-dropdown-list-item">
+        <a href="{% url 'store_fun1' %}" style="text-decoration: none;">
+            <i class='bx bx-store'></i>
+            My Store
+        </a>
+    </li>
+    <li class="profile-dropdown-list-item">
+        <a href="{% url 'user_fun' %}" style="text-decoration: none;">
+            <i class='bx bxs-shopping-bag'></i>
+            My Products
+        </a>
+    </li>
+    <li class="profile-dropdown-list-item">
+        <a href="{% url 'allproduct_fun' %}" style="text-decoration: none;">
+            <i class='bx bxs-shopping-bag'></i>
+            All Products
+        </a>
+    </li>
+    <hr/>
+    <li class="profile-dropdown-list-item">
+        <a href="{% url 'logout' %}" style="text-decoration: none;">
+            <i class='bx bx-log-out-circle'></i>
+            Log out
+        </a>
+    </li>
+
+</ul>
+
+
+<div>
+    <h3 class="pl-5 pt-4" style="color: black;">Cart</h3>
+</div>
+
+
+<div class="container rounded shadow" style="background: white;">
+
+    {% if number == 0 %}
+        <div class="row">
+            <div class="col d-flex justify-content-center">
+                <h1>NO PRODUCTS IN CART</h1>
+            </div>
+        </div>
+        
+    {% else %}
+        <div class="row no-gutters">
+            <div class="col">
+        <div class="container-fluid rounded" style="width:625px;background:white">
+            {% for s in cart %}
+                <div class="row no-gutters py-2 mt-3 rounded shadow" style="background:white">
+                    <div class="col-4 pl-3">
+                        <img class="rounded" src="{{s.product.pro_image.url}}" style="width:80%">
+                    </div>
+                    <div class="col-8">
+                        <div class="row">
+                            <b style="text-transform: uppercase;">{{s.product.title}}</b>
+                        </div>
+                        <div class="row">
+                            <small style="color: rgb(133, 133, 133);">{{s.product.description}}</small>
+                        </div>
+                        <div class="row mt-1">
+                            <small style="color: rgb(187, 187, 187);">Sold By: {{s.product.user.first_name}}</small>
+                        </div>
+                        <div class="row mt-1">
+                            <div class="col-1">
+                                <a href="{% url 'update_qty1' s.id %}"><button type="button" id="minBtn" style="border:none; background:transparent"><i data-toggle="tooltip" data-placement="top" title="Decrease" style="color: black ;" class='bx bxs-minus-circle ico3'></i></button></a>
+                            </div>
+                            <div class="col-1">
+                                <b><label id="label1" class="label1">{{s.qty}}</label></b>
+                                <input type="hidden" name="qty" id="qty" value="">
+                            </div>
+                            <div class="col-1">
+                                <a href="{% url 'update_qty2' s.id %}"><button id="plsBtn" type="button" style="border:none; background:transparent"><i data-toggle="tooltip" data-placement="top" title="Increase" style="color: black;" class='bx bxs-plus-circle ico3'></i></button></a>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <span id="price"><span style="color: rgb(133, 133, 133);">Price: </span><b>₹{{s.product.price}}</b></span>
+                        </div>
+                        <div class="row pt-1">
+                            <span><i class='bx bx-refresh' style="font-size: 23px;"></i></span>
+                            <small><b>14 Day </b><span style="color: rgb(133, 133, 133);">return available</span></small>
+                        </div>
+                        <div class="row pt-1">
+                            <i class='bx bx-check' style="font-size: 23px;"></i>
+                            <small><span style="color: rgb(133, 133, 133);">Delivery by </span><b>12 May 2023</b></small>
+                            <a href="{% url 'delete_cart' s.id %}"><i data-toggle="tooltip" data-placement="top" title="Remove From Cart" style="color: black ; font-size: 23px; position:relative; left:220px; bottom:170px" class='bx bx-x'></i></a>
+                        </div>
+                    </div>
+                </div>
+                <br>
+            {% endfor %} 
+        </div>
+            </div>
+            <div class="col">
+        <div class="container-fluid mt-4 border-left" style="width:410px; background:white; padding-top:10px; padding-left:25px; padding-right:25px;">
+            <div class="row">
+                <b style="color: rgb(133, 133, 133); font-size:13px; ">COUPONS</b>
+            </div>
+            <div class="row border-bottom pb-2 mt-2">
+                <div class="col-1">
+                    <i class='bx bxs-purchase-tag pt-3' style="font-size: 23px; position:relative; left:-10px"></i>
+                </div>
+                <div class="col-4 pt-3" style="font-size: 13px;">
+                    <b>Apply Coupons</b>
+                </div>
+                <div class="col-7">
+                    <b><button type="button" style="margin-left:142px;"  class="btn btn-outline-info">APPLY</button></b>
+                </div>
+            </div>
+            <div class="row pt-3">
+                <span style="color: rgb(110, 110, 110); font-size:13px;">PRICE DETAILS( {{number}} items)</span>
+            </div>
+            <div class="row pt-3">
+                <div class="col">
+                    <span style="position: relative; right:14px;color: rgb(133, 133, 133); font-size:13px;">Total MRP</span>
+                </div>
+                <div class="col">
+                    <span class="float-right" style="position: relative; left:14px;font-size:15px;">₹{{total}}</span>
+                </div>
+            </div>
+            <div class="row pt-2">
+                <div class="col">
+                    <span style="position: relative; right:14px;color: rgb(133, 133, 133); font-size:13px;">Discount on MRP</span>
+                </div>
+                <div class="col">
+                    <span class="float-right" style="color:rgb(78, 218, 78);position: relative; left:14px;font-size:15px;">-₹1000</span>
+                </div>
+            </div>
+            <div class="row border-bottom pb-2 pt-2">
+                <div class="col">
+                    <span style="position: relative; right:14px;color: rgb(133, 133, 133); font-size:13px;">Convenience Fee</span>
+                </div>
+                <div class="col">
+                    <span class="float-right" style="position: relative; left:14px;font-size:15px;"><s>-₹99</s> FREE</span>
+                </div>
+            </div>
+            <div class="row pb-2 pt-3">
+                <div class="col">
+                    <span style="position: relative; right:14px; font-size:13px;"><b>Total Amount</b></span>
+                </div>
+                <div class="col">
+                    <span class="float-right" style="position: relative; left:14px;font-size:15px;">₹{{total}}</span>
+                </div>
+            </div>
+            <div class="row pb-2 pt-3">
+                <div class="col">
+                    <button  type="button" class="btn btn-info" style="position: relative; right:14px; width:390px">PLACE ORDER</button>
+                </div>
+            </div>
+        </div>
+            </div>
+        </div>
+    {% endif %}
+
+
+
+
+
+</div>
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript">
+
+
+    $(function () {
+        $('[data-toggle="tooltip"]').tooltip()
+    })
+
+
+    
+   
+
+    let profileDropdownList = document.querySelector(".profile-dropdown-list");
+    let btn = document.querySelector(".dropbtn");
+
+    const toggle = ()=> profileDropdownList.classList.toggle("active");
+
+
+
+    let mbtn = document.querySelector("#minBtn");
+    let pbtn = document.querySelector("#plsBtn");
+    let lab = document.querySelector("#label1");
+    let quantity = document.getElementById("qty");
+    let pri = document.getElementById("price");
+    
+    pbtn.addEventListener("click",()=>{
+        let result = Number(lab.innerText) + 1;
+        quantity.setAttribute("value",result);
+        lab.innerText=result;
+    })
+    mbtn.addEventListener("click",()=>{
+        if(lab.innerText == "1")
+        {
+            lab.innerText="1";
+        }
+        else{
+            let result = Number(lab.innerText) - 1;
+            quantity.setAttribute("value",result);
+            lab.innerText=result;
+        }
+    })
+
+
+    
+</script>
+
+
+
+{% endblock %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

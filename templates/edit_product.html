@@ -1,0 +1,189 @@
+{% extends 'pages.html' %}
+
+{%load static%}
+<link rel="stylesheet" type="text/css" href="{% static 'css/style1.css' %}">
+
+{%block title%}
+    <title>Edit-product</title>
+{%endblock%}
+
+{% block page %}
+
+
+<div class="container ende">
+    {% for msg in messages %}
+    <div class="alert alert-success mt-5 alert-dismissible fade show msg" style="width: 500px;">
+        <button type="button" class="close" data-dismiss="alert">x</button>
+        {{ msg }}
+    </div>
+    {% endfor %}
+</div>
+
+
+<div class="container-fluid contain" style="height: 60px;">
+    <div class="row">
+        <div class="col-2">
+            <img src="{% static 'image/login_logo.png' %}" class="pt-1" style="width: 25%;">
+        </div>
+        <div class="col-8">
+
+        </div>
+        <div class="col-1">
+            <a href="{% url 'prod_cart' %}"><i class='bx bxs-cart pt-3 cart_butt'></i>
+            <div style="background-color: rgb(35, 161, 235); color:white; font-size:15px; width:25px; height:25px; justify-content:center; text-align:center; position:relative; bottom:45px; left:20px; border-radius:50%; padding-bottom:4px; text-decoration:none"><b>{{number}}</b></div></a>
+        </div>
+        <div class="col-1">
+            {% if det.user_image == '/static/image/default.png' %}
+                <a href="#"><img src="{% static 'image/default.png' %}" width="40" height="40" class="dropbtn mt-2 rounded-circle img-thumbnail shadow-sm" onclick="toggle()"></a>
+            {% else %}
+                <a href="#"><img src="{{ det.user_image.url }}" width="40" height="40" class="dropbtn mt-2 rounded-circle img-thumbnail shadow-sm" onclick="toggle()"></a>
+            {% endif %}
+        </div>
+    </div>
+</div>
+<ul class="profile-dropdown-list">
+
+    <li class="profile-dropdown-list-item">
+        <a href="{% url 'profile_fun' %}" style="text-decoration: none;">
+            <i class='bx bxs-user'></i>
+            Profile
+        </a>
+    </li>
+    <li class="profile-dropdown-list-item">
+        <a href="{% url 'store_fun1' %}" style="text-decoration: none;">
+            <i class='bx bx-store'></i>
+            My Store
+        </a>
+    </li>
+    <li class="profile-dropdown-list-item">
+        <a href="{% url 'user_fun' %}" style="text-decoration: none;">
+            <i class='bx bxs-shopping-bag'></i>
+            My Products
+        </a>
+    </li>
+    <li class="profile-dropdown-list-item">
+        <a href="{% url 'allproduct_fun' %}" style="text-decoration: none;">
+            <i class='bx bxs-shopping-bag'></i>
+            All Products
+        </a>
+    </li>
+    <hr/>
+    <li class="profile-dropdown-list-item">
+        <a href="{% url 'logout' %}" style="text-decoration: none;">
+            <i class='bx bx-log-out-circle'></i>
+            Log out
+        </a>
+    </li>
+
+</ul>
+
+
+
+<div>
+    <h3 class="pl-5 pt-4" style="color: black;">Edit Product</h3>
+</div>
+
+<br>
+<br>
+<div class="container-fluid rounded" style="background-color: white; width:850px">
+    <div class="row pt-1 pb-3">
+        <div class="col" style="padding-left:30px; padding-top:7px;">
+            {% if cat.image == '/static/image/default.png' %}
+                <img src="{% static 'image/default.png' %}" class="dropbtn rounded mt-2 shadow-sm">
+            {% else %}
+                <img src="{{ pro.pro_image.url }}" class="dropbtn mt-2 rounded shadow-sm">
+            {% endif %}
+        </div>
+        <div class="col pt-2">
+            <form method="post" action="{% url 'edit_product' pro.id %}" enctype="multipart/form-data">
+                {% csrf_token %}
+                    <div class="row">
+                        <div class="col">
+                            <div class="form-group">
+                                <label class="form-label"><b>Product Title</b></label>
+                                <input type="text" class="form-control" name="title" value="{{pro.title}}" placeholder="Enter Title" required>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <div class="form-group">
+                                <label class="form-label"><b>Product Discription</b></label>
+                                <textarea class="form-control" placeholder="Description" name="desc" rows="4">{{pro.description}}</textarea>
+                              </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <div class="form-group">
+                                <label class="form-label"><b>Slug</b></label>
+                                <input type="text" class="form-control" name="slug" value="{{pro.pro_slug}}" readonly>
+                                <small>This Field is auto Generated.....</small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <div class="form-group">
+                                <label class="ml-1"><b>Product Image</b></label>
+                                <input type="file" class="form-control m-0" style="height:44px" name="image12">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <div class="form-group">
+                                <label class="form-label"><b>Price</b></label>
+                                <input type="text" class="form-control" name="price" value="{{pro.price}}" placeholder="Enter Price" required>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col">
+                            <button type="submit" class="btn btn-dark" style="width: 380px;">Done</button>
+                        </div>
+                    </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+
+
+<script type="text/javascript">
+
+
+    let profileDropdownList = document.querySelector(".profile-dropdown-list");
+    let btn = document.querySelector(".dropbtn");
+
+    const toggle = ()=> profileDropdownList.classList.toggle("active");
+
+
+
+
+    
+</script>
+
+
+
+{% endblock %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,622 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;600&display=swap');
+
+
+:root{
+    --primary: #eeeeee;
+    --secondary: #085594;
+    --green: #82cd47;
+    --secondary-light: rgb(34, 124, 112, 0.2);
+    --secondary-light-2: rgb(127, 183, 126, 0.1);
+    --white:#fff;
+    --black: #393e46;
+
+    --shadow: 0px 2px 8px 0px var(var(--secondary-light));
+    
+}
+
+
+
+
+
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+/* html, body{
+    background: rgb(18, 31, 75);
+} */
+
+.contain{
+    background-color:rgb(8, 75, 104);
+    box-shadow: 0px 1px 50px rgb(49, 49, 49);
+}
+
+.cart_butt{
+    text-decoration:none;
+    font-size: 30px;
+    color:white;
+}
+
+.cart_butt:hover{
+    color: rgb(56, 149, 236);
+}
+
+.shad{
+    box-shadow: 0px 1px 50px rgb(179, 179, 179);
+}
+
+
+.popup-screen{
+    z-index: 999999;
+    position: fixed;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(2px);
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    visibility: hidden;
+}
+
+.popup-screen.active{
+    visibility: visible;
+}
+
+.popup-box{
+    position: relative;
+    border-left-style: solid;
+    border-left-color: rgb(60, 78, 83);
+    border-radius: 5px;
+    background: white;
+    max-width: 500px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    margin: 20px;
+    padding: 20px;
+    box-shadow: 0px 0px 40px rgb(121, 121, 121);
+    transform: scale(0);
+    transition: ease 0.3s;
+}
+
+.popup-screen.active .popup-box{
+    transform: scale(1);
+}
+
+.popup-box h2{
+    font-weight: 600;
+}
+
+.popup-box p{
+    margin: 4px;
+    margin-left: 5px;
+}
+
+.popup-box .btn1{
+    background: rgb(7, 48, 71);
+    color: white;
+    text-decoration: none;
+    font-size: 19px;
+    text-transform: uppercase;
+    padding: 5px 20px;
+    font-weight: 500;
+    border-radius: 50px;
+    transition: ease 0.3s;
+}
+
+.popup-box .btn1:hover{
+    box-shadow: 0px 2px 7px rgb(170, 170, 170);
+    color: rgb(7, 48, 71);
+    background: white;
+    transition: ease 0.3s;
+}
+
+
+.popup-box .btn2{
+    background: rgb(7, 48, 71);
+    color: white;
+    text-decoration: none;
+    font-size: 19px;
+    text-transform: uppercase;
+    padding: 5px 20px;
+    font-weight: 500;
+    border-radius: 50px;
+    transition: ease 0.3s;
+}
+
+.popup-box .btn2:hover{
+    box-shadow: 0px 2px 7px rgb(170, 170, 170);
+    color: rgb(7, 48, 71);
+    background: white;
+    transition: ease 0.3s;
+}
+
+.ico{
+    position: absolute;
+    left:720px;
+    top:10px; 
+    z-index:1; 
+    font-size:25px;
+    border-radius: 50%;
+    padding: 5px;
+}
+
+
+.ico:hover{
+    box-shadow: 0px 2px 7px rgb(170, 170, 170);
+}
+
+.profile-dropdown-list{
+    position: absolute;
+    z-index: 2;
+    left: 1125px;
+    top: 70px;
+    width: 170px;
+    list-style-type: none;
+    box-sizing: border-box;
+    font-family: "Poppins",  sans-serif;
+    background-color: var(--white);
+    border-radius: 5px;
+    visibility: hidden;
+    transform: scale(0);
+    transition: ease 0.2s;
+}
+
+.profile-dropdown-list.active{
+    visibility: visible;
+    transform: scale(1);
+    transition: ease 0.2s;
+}
+
+.profile-dropdown-list-item{
+    padding: 0.5rem 0 0.5rem 0.8rem;
+    transition: background-color 0.2s, padding-left 0.2s;
+}
+
+.profile-dropdown-list-item a{
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: var(--black)
+}
+
+
+.profile-dropdown-list-item a i{
+    margin-right: 0.9rem;
+    font-size: 1.1rem;
+    width: 2rem;
+    height: 2rem;
+    background-color: rgb(8, 75, 104);
+    color: var(--white);
+    line-height: 2rem;
+    text-align: center;
+    border-radius: 50%;
+
+}
+
+.profile-dropdown-list-item:hover{
+    padding-left: 1.2rem;
+    background-color: var(--secondary-light);
+}
+
+.profile-dropdown-list hr{
+    border: 0.5px solid rgb(8, 75, 104);
+}
+
+/* pic pop up */
+
+.popup-screen1{
+    z-index: 999999;
+    position: fixed;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(2px);
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    visibility: hidden;
+}
+
+.popup-screen1.active{
+    visibility: visible;
+}
+
+.popup-box1{
+    position: relative;
+    border-left-style: solid;
+    border-left-color: rgb(60, 78, 83);
+    border-radius: 5px;
+    background: white;
+    max-width: 500px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    margin: 20px;
+    padding: 20px;
+    box-shadow: 0px 0px 40px rgb(121, 121, 121);
+    transform: scale(0);
+    transition: ease 0.3s;
+}
+
+.popup-screen1.active .popup-box1{
+    transform: scale(1);
+}
+
+.popup-box1 h2{
+    font-weight: 600;
+}
+
+.popup-box1 p{
+    margin: 4px;
+    margin-left: 5px;
+}
+
+.popup-box1 .btn1{
+    background: rgb(7, 48, 71);
+    color: white;
+    text-decoration: none;
+    font-size: 19px;
+    text-transform: uppercase;
+    padding: 5px 20px;
+    font-weight: 500;
+    border-radius: 50px;
+    transition: ease 0.3s;
+}
+
+.popup-box1 .btn1:hover{
+    box-shadow: 0px 2px 7px rgb(170, 170, 170);
+    color: rgb(7, 48, 71);
+    background: white;
+    transition: ease 0.3s;
+}
+
+
+.popup-box1 .btn2{
+    background: rgb(7, 48, 71);
+    color: white;
+    text-decoration: none;
+    font-size: 19px;
+    text-transform: uppercase;
+    padding: 5px 20px;
+    font-weight: 500;
+    border-radius: 50px;
+    transition: ease 0.3s;
+}
+
+.popup-box1 .btn2:hover{
+    box-shadow: 0px 2px 7px rgb(170, 170, 170);
+    color: rgb(7, 48, 71);
+    background: white;
+    transition: ease 0.3s;
+}
+
+.pop-fun{
+    position: relative;
+    left: 50px;
+    padding-bottom: 10px;
+}
+
+
+.upload_file{
+    display: none;
+}
+
+.up-label{
+    display: block;
+    position: relative;
+    background-color: rgb(7, 48, 71);
+    color: white;
+    font-size: 18px;
+}
+
+.ico1{
+    position: absolute;
+    left:160px;
+    bottom: 20px;
+    z-index:0; 
+    font-size:25px;
+    border-radius: 50%;
+    padding: 5px;
+    color: white;
+    background-color:rgb(7, 48, 71) ;
+}
+
+.ico1:hover{
+    box-shadow: 0px 2px 10px rgb(131, 131, 131);
+}
+
+.btn3{
+    background: rgb(7, 48, 71);
+    color: white;
+    text-decoration: none;
+    font-size: 19px;
+    text-transform: uppercase;
+    padding: 2px 20px;
+    font-weight: 500;
+    border: none;
+    border-radius: 50px;
+    transition: ease 0.3s;
+}
+
+.btn3:hover{
+    box-shadow: 0px 2px 7px rgb(170, 170, 170);
+    color: rgb(7, 48, 71);
+    background: white;
+    transition: ease 0.3s;
+    text-decoration: none;
+    
+}
+
+
+
+
+
+/* edit pop up */
+
+.popup-screen2{
+    z-index: 999999;
+    position: fixed;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(2px);
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    visibility: hidden;
+}
+
+.popup-screen2.active{
+    visibility: visible;
+}
+
+.popup-box2{
+    position: relative;
+    border-left-style: solid;
+    border-left-color: rgb(60, 78, 83);
+    border-radius: 5px;
+    background: white;
+    max-width: 500px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    margin: 20px;
+    padding: 20px;
+    box-shadow: 0px 0px 40px rgb(121, 121, 121);
+    transform: scale(0);
+    transition: ease 0.3s;
+}
+
+.popup-screen2.active .popup-box2{
+    transform: scale(1);
+}
+
+.popup-box2 h2{
+    font-weight: 600;
+}
+
+.popup-box2 p{
+    margin: 4px;
+    margin-left: 5px;
+}
+
+.popup-box2 .btn1{
+    background: rgb(7, 48, 71);
+    color: white;
+    text-decoration: none;
+    font-size: 19px;
+    text-transform: uppercase;
+    padding: 5px 20px;
+    font-weight: 500;
+    border-radius: 50px;
+    transition: ease 0.3s;
+}
+
+.popup-box2 .btn1:hover{
+    box-shadow: 0px 2px 7px rgb(170, 170, 170);
+    color: rgb(7, 48, 71);
+    background: white;
+    transition: ease 0.3s;
+}
+
+.btn4{
+    background: rgb(7, 48, 71);
+    color: white;
+    text-decoration: none;
+    font-size: 19px;
+    text-transform: uppercase;
+    padding: 2px 20px;
+    font-weight: 500;
+    border: none;
+    border-radius: 50px;
+    transition: ease 0.3s;
+}
+
+.btn4:hover{
+    box-shadow: 0px 2px 7px rgb(170, 170, 170);
+    color: rgb(7, 48, 71);
+    background: white;
+    transition: ease 0.3s;
+    text-decoration: none;
+    
+}
+
+
+/* terms_profile pop up */
+
+.popup-screen3{
+    z-index: 999999;
+    position: fixed;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(2px);
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    visibility: hidden;
+}
+
+.popup-screen3.active{
+    visibility: visible;
+}
+
+.popup-box3{
+    position: relative;
+    border-left-style: solid;
+    border-left-color: rgb(60, 78, 83);
+    border-radius: 5px;
+    background: white;
+    max-width: 500px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    margin: 20px;
+    padding: 20px;
+    box-shadow: 0px 0px 40px rgb(121, 121, 121);
+    transform: scale(0);
+    transition: ease 0.3s;
+}
+
+.popup-screen3.active .popup-box3{
+    transform: scale(1);
+}
+
+.popup-box3 h2{
+    font-weight: 600;
+}
+
+.popup-box3 p{
+    margin: 4px;
+    margin-left: 5px;
+}
+
+.popup-box3 .btn5{
+    background: rgb(7, 48, 71);
+    color: white;
+    text-decoration: none;
+    font-size: 19px;
+    text-transform: uppercase;
+    padding: 5px 20px;
+    font-weight: 500;
+    border-radius: 50px;
+    transition: ease 0.3s;
+}
+
+.popup-box3 .btn5:hover{
+    box-shadow: 0px 2px 7px rgb(170, 170, 170);
+    color: rgb(7, 48, 71);
+    background: white;
+    transition: ease 0.3s;
+}
+
+.toggle1 {
+    background: none;
+    border: none;
+    cursor: pointer;
+    /* Media query isn't shown here. */
+    font-size: var(--mobile-font-size);
+    font-weight: 400;
+    padding: 0;
+    /* Display at the top right of the container */
+    position: absolute;
+    top: 40px;
+    right: 70px;
+  }
+
+  .toggle2 {
+    background: none;
+    border: none;
+    cursor: pointer;
+    /* Media query isn't shown here. */
+    font-size: var(--mobile-font-size);
+    font-weight: 400;
+    padding: 0;
+    /* Display at the top right of the container */
+    position: absolute;
+    top: 40px;
+    right: 70px;
+  }
+
+
+  .toggle3 {
+    background: none;
+    border: none;
+    cursor: pointer;
+    /* Media query isn't shown here. */
+    font-size: var(--mobile-font-size);
+    font-weight: 400;
+    padding: 0;
+    /* Display at the top right of the container */
+    position: absolute;
+    top: 40px;
+    right: 70px;
+  }
+
+.ende{
+    position: absolute;
+    top: -5px;
+    left: 470px;
+    width: 50%;
+}
+
+.but1{
+    border: none;
+    border-radius: 50%;
+    background-color: rgb(7, 48, 71);
+    padding: 10px;
+    padding-left: 15px;
+    font-size: 20px;
+}
+.but2{
+    border: none;
+    border-radius: 50%;
+    background-color: rgb(7, 48, 71);
+    font-size: 50px;
+    
+}
+.label{
+    border: none;
+}
+
+
+
+.ico3{
+    position: relative;
+    right: 22px;
+    z-index:1; 
+    font-size:25px;
+    border-radius: 50%;
+    padding: 5px;
+}
+
+
+.ico3:hover{
+    box-shadow: 0px 2px 7px rgb(170, 170, 170);
+}
+
+.label1{
+    border: none;
+    position: relative;
+    right: 8px;
+    top: 3px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+

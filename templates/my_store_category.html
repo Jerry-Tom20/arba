@@ -1,0 +1,185 @@
+{% extends 'pages.html' %}
+
+{%load static%}
+<link rel="stylesheet" type="text/css" href="{% static 'css/style1.css' %}">
+
+{%block title%}
+    <title>My Store</title>
+{%endblock%}
+
+{% block page %}
+
+
+<div class="container ende">
+    {% for msg in messages %}
+    <div class="alert alert-success mt-5 alert-dismissible fade show msg" style="width: 500px;">
+        <button type="button" class="close" data-dismiss="alert">x</button>
+        {{ msg }}
+    </div>
+    {% endfor %}
+</div>
+
+
+<div class="container-fluid contain" style="height: 60px;">
+    <div class="row">
+        <div class="col-2">
+            <img src="{% static 'image/login_logo.png' %}" class="pt-1" style="width: 25%;">
+        </div>
+        <div class="col-8">
+
+        </div>
+        <div class="col-1">
+            <a href="{% url 'prod_cart' %}"><i class='bx bxs-cart pt-3 cart_butt'></i>
+            <div style="background-color: rgb(35, 161, 235); color:white; font-size:15px; width:25px; height:25px; justify-content:center; text-align:center; position:relative; bottom:45px; left:20px; border-radius:50%; padding-bottom:4px; text-decoration:none"><b>{{number}}</b></div></a>
+        </div>
+        <div class="col-1">
+            {% if det.user_image == '/static/image/default.png' %}
+                <a href="#"><img src="{% static 'image/default.png' %}" width="40" height="40" class="dropbtn mt-2 rounded-circle img-thumbnail shadow-sm" onclick="toggle()"></a>
+            {% else %}
+                <a href="#"><img src="{{ det.user_image.url }}" width="40" height="40" class="dropbtn mt-2 rounded-circle img-thumbnail shadow-sm" onclick="toggle()"></a>
+            {% endif %}
+        </div>
+    </div>
+</div>
+<ul class="profile-dropdown-list">
+
+    <li class="profile-dropdown-list-item">
+        <a href="{% url 'profile_fun' %}" style="text-decoration: none;">
+            <i class='bx bxs-user'></i>
+            Profile
+        </a>
+    </li>
+    <li class="profile-dropdown-list-item">
+        <a href="{% url 'store_fun1' %}" style="text-decoration: none;">
+            <i class='bx bx-store'></i>
+            My Store
+        </a>
+    </li>
+    <li class="profile-dropdown-list-item">
+        <a href="{% url 'user_fun' %}" style="text-decoration: none;">
+            <i class='bx bxs-shopping-bag'></i>
+            My Products
+        </a>
+    </li>
+    <li class="profile-dropdown-list-item">
+        <a href="{% url 'allproduct_fun' %}" style="text-decoration: none;">
+            <i class='bx bxs-shopping-bag'></i>
+            All Products
+        </a>
+    </li>
+    <hr/>
+    <li class="profile-dropdown-list-item">
+        <a href="{% url 'logout' %}" style="text-decoration: none;">
+            <i class='bx bx-log-out-circle'></i>
+            Log out
+        </a>
+    </li>
+
+</ul>
+
+
+
+<div>
+    <h3 class="pl-5 pt-4" style="color: black;">Categories By You</h3>
+</div>
+
+<br>
+<br>
+<div class="container">
+    <div class="row no-gutters">
+        <div class="col">
+            <a href="{% url 'store_fun1' %}"><button type="button" style="width: 550px;" class="btn btn-info">Categories</button></a>
+        </div>
+        <div class="col">
+            <a href="{% url 'store_fun2' %}"><button type="button" style="width: 550px;" class="btn btn-info">Products</button></a>
+        </div>
+    </div>
+    <div class="row mt-4">
+        <div class="col">
+            <a href="{% url 'category_add_fun' %}"><button type="button" class="btn btn-info">ADD</button></a>
+        </div>
+    </div>
+    <div class="row mt-4">
+        <div class="col">
+            <table class="table table-bordered">
+                <thead class="thead-dark">
+                  <tr>
+                    <th scope="col" style="color: white;">Image</th>
+                    <th scope="col" style="color: white;">Name</th>
+                    <th scope="col" style="color: white;">Slug</th>
+                    <th scope="col" style="color: white;">Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {% for s in category %}
+                    <tr>
+                      {% if s.image == '/static/image/default.png' %}
+                        <td style="background-color: white; width: 400px;">
+                          <img src="{% static 'image/default.png' %}" style="width: 100%;">
+                        </td>
+                      {% else %}
+                        <td style="background-color: white; width: 400px;">
+                          <img src="{{ s.image.url }}" style="width: 100%;">
+                        </td>
+                      {% endif %}
+                      <td style="background-color: white;align-items: center; width:150px"><b>{{s.cat_name}}</b></td>
+                      <td style="background-color: white;">{{s.cat_slug}}</td>
+                      <td style="background-color: white;" class="d=flex justify-content-center">
+                        <a href="{% url 'delete_category_fun' s.id %}"><button type="button" class="btn btn-outline-danger" style="position: relative; left:70px"><i class='bx bxs-trash'></i></button></a>
+                        <a href="{% url 'edit_category_fun' s.cat_slug %}"><button type="button" class="btn btn-outline-warning" style="position: relative; left:70px"><i class='bx bx-pencil'></i></button></a>
+                      </td>
+                    </tr>
+                  {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+
+
+
+<script type="text/javascript">
+
+
+    let profileDropdownList = document.querySelector(".profile-dropdown-list");
+    let btn = document.querySelector(".dropbtn");
+
+    const toggle = ()=> profileDropdownList.classList.toggle("active");
+
+
+    const popupScreen1 = document.getElementById("popup-screen2");
+    const submitbtn1 = document.querySelector(".bt3");
+
+    const toggle3 = ()=> popupScreen1.classList.toggle("active"); 
+
+    submitbtn1.addEventListener("click", () =>{
+        popupScreen1.classList.remove("active");
+    });
+
+
+    
+</script>
+
+
+
+{% endblock %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,106 @@
+{% extends 'pages.html' %}
+
+{%load static%}
+<link rel="stylesheet" type="text/css" href="{% static 'css/style1.css' %}">
+
+{%block title%}
+    <title>All Products</title>
+{%endblock%}
+
+
+
+{% block page %}
+
+
+
+<div class="container-fluid contain" style="height: 60px;">
+    <div class="row">
+        <div class="col-2">
+            <img src="{% static 'image/login_logo.png' %}" class="pt-1" style="width: 25%;">
+        </div>
+        <div class="col-8">
+
+        </div>
+        <div class="col-1">
+            <a href="{% url 'prod_cart' %}"><i class='bx bxs-cart pt-3 cart_butt'></i>
+            <div style="background-color: rgb(35, 161, 235); color:white; font-size:15px; width:25px; height:25px; justify-content:center; text-align:center; position:relative; bottom:45px; left:20px; border-radius:50%; padding-bottom:4px; text-decoration:none"><b>{{number}}</b></div></a>
+        </div>
+        <div class="col-1">
+            {% if det.user_image == '/static/image/default.png' %}
+                <a href="#"><img src="{% static 'image/default.png' %}" width="40" height="40" class="dropbtn mt-2 rounded-circle img-thumbnail shadow-sm" onclick="toggle()"></a>
+            {% else %}
+                <a href="#"><img src="{{ det.user_image.url }}" width="40" height="40" class="dropbtn mt-2 rounded-circle img-thumbnail shadow-sm" onclick="toggle()"></a>
+            {% endif %}
+        </div>
+    </div>
+</div>
+<ul class="profile-dropdown-list">
+
+    <li class="profile-dropdown-list-item">
+        <a href="{% url 'profile_fun' %}" style="text-decoration: none;">
+            <i class='bx bxs-user'></i>
+            Profile
+        </a>
+    </li>
+    <li class="profile-dropdown-list-item">
+        <a href="{% url 'store_fun1' %}" style="text-decoration: none;">
+            <i class='bx bx-store'></i>
+            My Store
+        </a>
+    </li>
+    <li class="profile-dropdown-list-item">
+        <a href="{% url 'user_fun' %}" style="text-decoration: none;">
+            <i class='bx bxs-shopping-bag'></i>
+            My Products
+        </a>
+    </li>
+    <hr/>
+    <li class="profile-dropdown-list-item">
+        <a href="{% url 'logout' %}" style="text-decoration: none;">
+            <i class='bx bx-log-out-circle'></i>
+            Log out
+        </a>
+    </li>
+
+</ul>
+
+<div>
+    <h3 class="pl-5 pt-4" style="color: black;">All Products</h3>
+</div>
+
+<div class="container pt-3">
+    <div class="row">
+    
+        {%for s in products%}
+            <div class="col-4 pb-3">
+                    <a href="" style="text-decoration:none; color:black">
+                    <div class="card" style="border-radius: 10px;">
+                        <img class="card-image-top" src="{{s.pro_image.url}}" style="width: 100%; border-top-left-radius:10px; border-top-right-radius:10px; box-shadow: 0px 10px 50px rgb(190, 190, 190)">
+                        <div class="card-body">
+                            <h5 class="card-title">{{s.title}}</h5>
+                            <p>{{s.description}}</p>
+                            <b>Price - ₹</b>{{s.price}}
+                        </div>
+                        <a href="{% url 'adding_product_fun' s.pro_slug %}"><button type="button" style="width:332px" class="btn btn-info mx-2 mb-2">Add To Cart</button></a>
+                    </div>
+                    </a>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+
+
+
+<script type="text/javascript">
+
+
+    let profileDropdownList = document.querySelector(".profile-dropdown-list");
+    let btn = document.querySelector(".dropbtn");
+
+    const toggle = ()=> profileDropdownList.classList.toggle("active");
+
+    
+</script>
+
+
+{% endblock %}

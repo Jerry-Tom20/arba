@@ -1,0 +1,85 @@
+{% extends 'first.html' %}
+
+{%load static%}
+<link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+
+{%block title%}
+    <title>Signup</title>
+{%endblock%}
+
+
+
+
+{% block content %}
+
+<div class="container ende">
+    {% for msg in messages %}
+    <div class="alert alert-danger mt-4 alert-dismissible fade show msg" style="width: 450px;">
+        <button type="button" class="close " data-dismiss="alert">x</button>
+        {{ msg }}
+    </div>
+    {% endfor %}
+</div>
+
+<form method="post" action="{% url 'user_create' %}">
+    {% csrf_token %}
+    <div class="container-fluid py-2 cont-sett2" style="width: 1000px;">
+
+        <div class="row no-gutters mb-5">
+            <div class="col-6 fir">
+                <h1 class=""></h1>
+                <div class="py-5">
+                    <img src="{% static 'image/login.png' %}" style="width: 100%;">
+                </div>
+            </div>
+            <div class="col-6 sec">
+                <div  align="center" class="pt-4">
+                    <img src="{% static 'image/login_logo.png' %}" style="width: 15%;">
+                </div>
+                <h2 class="mt-2" align="center">WE-STORE</h2>
+                <h6 class="pt-1" align="center">Welcome to the online handle of We-store. Availability to each and every person around the globe is the moto.</h6>
+                <div style="margin-left: 50px;margin-right: 50px;margin-top: 40px;">
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col">
+                                <label class="form-label"><b>Username</b></label>
+                                <input type="text" class="form-control" name="uname" placeholder="Enter Username" required>
+                            </div>
+                            <div class="col">
+                                <label class="form-label"><b>Fullname</b></label>
+                                <input type="text" class="form-control" name="fname" placeholder="Enter Username" required>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label"><b>Email</b></label>
+                        <input type="email" class="form-control" placeholder="Email" name="email" required>
+                        <small id="emailHelp" class="form-text text-muted">Once Emails set it can't be updated.</small>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label"><b>Password</b></label>
+                        <button id="toggle-password" class="toggle1" type="button"><span id="togglebut" class="material-symbols-outlined">visibility_off</span></button>
+                        <input id="password" type="password" class="form-control" name="upass" placeholder="Enter Password" required>
+                        <small id="emailHelp" class="form-text text-muted">Password must contain atleast 1 Caps letter, digit and special character.</small>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label"><b>Confirm Password</b></label>
+                        <button id="toggle-password1" class="toggle2" type="button"><span id="togglebut1" class="material-symbols-outlined">visibility_off</span></button>
+                        <input id="password1" type="password" class="form-control" name="ucpass" placeholder="Enter Password" required>
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-outline-dark mt-4" style="width: 385px;"><b>SIGN-UP</b></button>
+                    </div>
+                    <div>
+                        <small class="form-text text-muted">Already have an account <a href="{% url 'login_fun' %}" style="text-decoration: none;">Login<i class='bx bxs-chevron-right' style="position:relative; top:2px; left:-27px;"></i></a></small>
+                    </div>
+                    <br>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+
+{%endblock%}
+

@@ -1,0 +1,168 @@
+{% extends 'pages.html' %}
+
+{%load static%}
+<link rel="stylesheet" type="text/css" href="{% static 'css/style1.css' %}">
+
+{%block title%}
+    <title>Add to Cart</title>
+{%endblock%}
+
+
+
+{% block page %}
+
+
+
+<div class="container-fluid contain" style="height: 60px;">
+    <div class="row">
+        <div class="col-2">
+            <img src="{% static 'image/login_logo.png' %}" class="pt-1" style="width: 25%;">
+        </div>
+        <div class="col-8">
+
+        </div>
+        <div class="col-1">
+            <a href="{% url 'prod_cart' %}"><i class='bx bxs-cart pt-3 cart_butt'></i>
+            <div style="background-color: rgb(35, 161, 235); color:white; font-size:15px; width:25px; height:25px; justify-content:center; text-align:center; position:relative; bottom:45px; left:20px; border-radius:50%; padding-bottom:4px; text-decoration:none"><b>{{number}}</b></div></a>
+        </div>
+        <div class="col-1">
+            {% if det.user_image == '/static/image/default.png' %}
+                <a href="#"><img src="{% static 'image/default.png' %}" width="40" height="40" class="dropbtn mt-2 rounded-circle img-thumbnail shadow-sm" onclick="toggle1()"></a>
+            {% else %}
+                <a href="#"><img src="{{ det.user_image.url }}" width="40" height="40" class="dropbtn mt-2 rounded-circle img-thumbnail shadow-sm" onclick="toggle1()"></a>
+            {% endif %}
+        </div>
+    </div>
+</div>
+<ul class="profile-dropdown-list">
+
+    <li class="profile-dropdown-list-item">
+        <a href="{% url 'profile_fun' %}" style="text-decoration: none;">
+            <i class='bx bxs-user'></i>
+            Profile
+        </a>
+    </li>
+    <li class="profile-dropdown-list-item">
+        <a href="{% url 'store_fun1' %}" style="text-decoration: none;">
+            <i class='bx bx-store'></i>
+            My Store
+        </a>
+    </li>
+    <li class="profile-dropdown-list-item">
+        <a href="{% url 'allproduct_fun' %}" style="text-decoration: none;">
+            <i class='bx bxs-shopping-bag'></i>
+            All Products
+        </a>
+    </li>
+    <li class="profile-dropdown-list-item">
+        <a href="{% url 'user_fun' %}" style="text-decoration: none;">
+            <i class='bx bxs-shopping-bag'></i>
+            My Products
+        </a>
+    </li>
+    <hr/>
+    <li class="profile-dropdown-list-item">
+        <a href="{% url 'logout' %}" style="text-decoration: none;">
+            <i class='bx bx-log-out-circle'></i>
+            Log out
+        </a>
+    </li>
+
+</ul>
+
+<div>
+    <h3 class="pl-5 pt-4" style="color: black;">Add To Cart</h3>
+</div>
+
+<form method="post" action="{% url 'add_to_cart' product.id %}">
+    {% csrf_token %}
+    <div class="container-fluid rounded shadow border" style="background: white; width:600px;">
+
+    
+    <div class="row no-gutters rounded" style="background-color: rgb(241, 241, 241); margin-top:20px; margin-left:5px; margin-right:5px; margin-bottom:20px;">
+        <div class="col-5 border py-3 pl-2">
+            <div class="row pl-3">
+                <div class="col">
+                    <img src="{{product.pro_image.url}}" style="width:90%">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <div class="row">
+                        <div class="col">
+                            <button type="button" id="minBtn" class="btn btn-info" style="font-size: 16px; width:39px; position:relative; left:40px; top:10px">-</button>
+                        </div>
+                        <div class="col">
+                            <b><label id="label" class="label d-flex justify-content-center number pt-3 mr-1">1</label></b>
+                            <input type="hidden" name="qty" id="qty" value="1">
+                        </div>
+                        <div class="col">
+                            <button id="plsBtn" type="button" class="btn btn-info" style=" position:relative; right:30px; top:10px">+</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-5 border" style="position:relative; padding-top:40px; padding-left:10px;">
+            <b style="font-size: 30px;">{{product.title}}</b>
+        </div>
+        <div class="col-2 border" style="position:relative; padding-top:40px; padding-left:10px; padding-top:70px">
+            <b style="font-size: 30px;">₹{{product.price}}</b>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col d-flex justify-content-center">
+            <a href="{% url 'user_fun' %}"><button type="button" class="btn btn-dark">Cancel</button></a>
+        </div>
+        <div class="col d-flex justify-content-center">
+            <button type="submit" class="btn btn-outline-info"><b>ADD TO CART</b></button>
+        </div>
+    </div>
+
+    <br>
+
+
+
+    </div>
+</form>
+
+
+
+
+
+
+
+
+
+<script type="text/javascript">
+
+    let profileDropdownList = document.querySelector(".profile-dropdown-list");
+    let btn = document.querySelector(".dropbtn");
+
+    const toggle1 = ()=> profileDropdownList.classList.toggle("active");
+
+
+    let quantity = document.getElementById("qty");
+    let mbtn = document.querySelector("#minBtn");
+    let pbtn = document.querySelector("#plsBtn");
+    let lab = document.querySelector("#label");
+    
+    pbtn.addEventListener("click",()=>{
+        let result = Number(lab.innerText) + 1;
+        quantity.setAttribute("value",result);
+        lab.innerText=result;
+    })
+    mbtn.addEventListener("click",()=>{
+        if(lab.innerText == "1")
+        {
+            lab.innerText="1";
+        }
+        else{
+            let result = Number(lab.innerText) - 1;
+            quantity.setAttribute("value",result);
+            lab.innerText=result;
+        }
+    })
+
+</script>
+{% endblock %}
