@@ -1,0 +1,114 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+html, body{
+    background: rgb(9, 66, 92);
+}
+
+
+/* Login Page */
+
+.ende {
+    position: absolute;
+    top: 100px;
+    left: 185px;
+    z-index: 1;
+}
+
+
+
+.row .fir{
+    background-color: rgb(174, 232, 247);
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+}
+.row .sec{
+    background: white;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+
+}
+
+.cont-sett1{
+    position: absolute;
+    top: 60px;
+    left: 170px;
+    background: rgb(9, 66, 92);
+}
+
+
+form i{
+    margin-left: 30px;
+    cursor: pointer;
+    color: black;
+}
+
+.toggle {
+    background: none;
+    border: none;
+    cursor: pointer;
+    /* Media query isn't shown here. */
+    font-size: var(--mobile-font-size);
+    font-weight: 400;
+    padding: 0;
+    /* Display at the top right of the container */
+    position: absolute;
+    top: 360px;
+    right: 60px;
+}
+
+
+
+/* Login Page Ends*/
+
+/* Signup Page Starts */
+
+.cont-sett2{
+    position: absolute;
+    top: 20px;
+    left: 170px;
+    background: rgb(9, 66, 92);
+}
+
+.toggle1 {
+    background: none;
+    border: none;
+    cursor: pointer;
+    /* Media query isn't shown here. */
+    font-size: var(--mobile-font-size);
+    font-weight: 400;
+    padding: 0;
+    /* Display at the top right of the container */
+    position: absolute;
+    top: 470px;
+    right: 60px;
+}
+
+.toggle2 {
+    background: none;
+    border: none;
+    cursor: pointer;
+    /* Media query isn't shown here. */
+    font-size: var(--mobile-font-size);
+    font-weight: 400;
+    padding: 0;
+    /* Display at the top right of the container */
+    position: absolute;
+    top: 598px;
+    right: 60px;
+  }
+
+
+
+
+
+
+
+
+
+
+
+
