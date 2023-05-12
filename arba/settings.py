@@ -16,6 +16,16 @@ from pathlib import Path
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 
+import environ
+
+env = environ.Env()
+
+environ.Env.read_env()
+
+
+
+
+
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
 
@@ -23,7 +33,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-p$&e!6x(#6d*+3350xeoo*=io$6sp#_1jm7z=gid59qbu9zcte'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ["*"]
 
@@ -74,7 +84,7 @@ WSGI_APPLICATION = 'arba.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
-DATABASES = {
+""" DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'arba2',
@@ -83,7 +93,19 @@ DATABASES = {
         'HOST': 'localhost',
         'PORT': '3306',
     }
+} """
+
+
+import dj_database_url
+
+DATABASES = {
+    
+    'default': dj_database_url.parse(env('DATABASE_URL'))
+    
 }
+
+
+
 
 
 # Password validation

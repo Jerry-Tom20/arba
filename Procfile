@@ -1,1 +1,0 @@
-web: gunicorn arba.wsgi --log-file -
