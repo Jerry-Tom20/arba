@@ -16,12 +16,6 @@ from pathlib import Path
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 
-import environ
-
-env = environ.Env()
-
-environ.Env.read_env()
-
 
 
 
@@ -33,9 +27,9 @@ environ.Env.read_env()
 SECRET_KEY = 'django-insecure-p$&e!6x(#6d*+3350xeoo*=io$6sp#_1jm7z=gid59qbu9zcte'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
-ALLOWED_HOSTS = ["*"]
+ALLOWED_HOSTS = []
 
 
 # Application definition
@@ -84,7 +78,7 @@ WSGI_APPLICATION = 'arba.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
-""" DATABASES = {
+DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'arba2',
@@ -93,15 +87,6 @@ WSGI_APPLICATION = 'arba.wsgi.application'
         'HOST': 'localhost',
         'PORT': '3306',
     }
-} """
-
-
-import dj_database_url
-
-DATABASES = {
-    
-    'default': dj_database_url.parse(env('DATABASE_URL'))
-    
 }
 
 
