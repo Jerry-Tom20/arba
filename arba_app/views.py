@@ -444,7 +444,7 @@ def delete_product_fun(request,id):
 def category_add_fun(request):
     u=request.user
     user=usermember.objects.get(user_id=u.id)
-    cat=categories.objects.filter(user_id=u.id)
+    cat=categories.objects.all()
     number=cart1.objects.filter(user_id=u.id).count()
     return render(request,'category_add.html',{'det':user,'category':cat,'number':number})
 
